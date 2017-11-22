@@ -1,3 +1,4 @@
+rootProject.name = 'data-warehouse'
 include 'webservice'
 include 'service'
 include 'repository'

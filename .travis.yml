@@ -1,0 +1,35 @@
+sudo:
+  required
+
+services:
+  - docker
+
+language: java
+
+jdk:
+  - oraclejdk8
+
+os:
+  - linux
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+branches:
+  only:
+    - develop
+
+after_success:
+
+   #LOGIN
+  - docker login -u $D_USER -p $D_PASS
+
+   #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "develop" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+   #DATAWAREHOUSE
+  - export DATAWAREHOUSE=vadimeladii7/data-warehouse
+  - docker build -t DATAWAREHOUSE:$COMMIT ./webservice
+  - docker tag DATAWAREHOUSE:$COMMIT DATAWAREHOUSE:$TAG
+  - docker push DATAWAREHOUSE

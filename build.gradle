@@ -19,6 +19,11 @@ allprojects {
         mavenCentral()
         mavenLocal()
     }
+
+    springBoot {
+        mainClass = 'md.utm.fcim.webservice.config.core.DataWarehouseApplication'
+    }
+
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
