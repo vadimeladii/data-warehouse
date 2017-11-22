@@ -30,6 +30,6 @@ after_success:
 
    #DATAWAREHOUSE
   - export DATAWAREHOUSE=vadimeladii7/data-warehouse
-  - docker build -t DATAWAREHOUSE:$COMMIT ./webservice
-  - docker tag DATAWAREHOUSE:$COMMIT DATAWAREHOUSE:$TAG
-  - docker push DATAWAREHOUSE
+  - docker build -t $DATAWAREHOUSE:$COMMIT ./webservice
+  - docker tag DATAWAREHOUSE:$COMMIT $DATAWAREHOUSE:$TAG
+  - docker push $DATAWAREHOUSE
