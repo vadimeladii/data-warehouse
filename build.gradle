@@ -33,7 +33,13 @@ subprojects {
         compile('org.springframework.boot:spring-boot-starter-hateoas')
         compile('org.springframework.boot:spring-boot-starter-jersey')
         compile('org.springframework.boot:spring-boot-starter-validation')
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
         compileOnly('org.projectlombok:lombok')
         testCompile('org.springframework.boot:spring-boot-starter-test')
+        compile "org.flywaydb:flyway-core:4.2.0"
+        compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
+        compile "org.flywaydb:flyway-core:4.2.0"
+        compile 'org.postgresql:postgresql'
+        compile group: 'com.google.guava', name: 'guava', version: '23.4-jre'
     }
 }

@@ -1,6 +1,6 @@
 package md.utm.fcim.webservice.config.spring.jersey;
 
-import md.utm.fcim.webservice.controller.impl.UserControllerImpl;
+import md.utm.fcim.webservice.controller.impl.BookControllerImpl;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.wadl.internal.WadlResource;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ public class JerseyConfig extends ResourceConfig {
 
     private void registerEndpoints() {
         register(WadlResource.class);
-        register(UserControllerImpl.class);
+        register(BookControllerImpl.class);
     }
 
 }
