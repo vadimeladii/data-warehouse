@@ -20,6 +20,9 @@ branches:
   only:
     - develop
 
+script:
+  - ./gradlew data-warehouse:webservice assemble
+
 after_success:
 
    #LOGIN

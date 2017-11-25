@@ -27,6 +27,7 @@ allprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
+
 subprojects {
     dependencies {
         compile('org.springframework.boot:spring-boot-starter-data-rest')
