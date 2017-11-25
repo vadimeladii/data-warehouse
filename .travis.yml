@@ -9,6 +9,9 @@ language: java
 jdk:
   - oraclejdk8
 
+script:
+  - ./gradlew data-warehouse:webservice assemble
+
 os:
   - linux
 
@@ -19,9 +22,6 @@ env:
 branches:
   only:
     - develop
-
-script:
-  - ./gradlew data-warehouse:webservice assemble
 
 after_success:
 
