@@ -35,3 +35,8 @@ after_success:
   - docker build -t $DATAWAREHOUSE:$COMMIT ./webservice
   - docker tag DATAWAREHOUSE:$COMMIT $DATAWAREHOUSE:$TAG
   - docker push $DATAWAREHOUSE
+
+
+notifications:
+  email:
+    - vadimeladii@gmail.com
