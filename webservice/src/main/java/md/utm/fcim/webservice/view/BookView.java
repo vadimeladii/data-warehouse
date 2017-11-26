@@ -19,8 +19,6 @@ public class BookView implements Serializable {
 
     private String genre;
 
-    private Long authorId;
-
     private Long numberOfPages;
 
     private String lang;

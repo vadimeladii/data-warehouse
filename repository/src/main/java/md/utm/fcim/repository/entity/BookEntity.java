@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class BookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
@@ -24,12 +25,15 @@ public class BookEntity {
     @Column(name = "genre")
     private String genre;
 
-    @Column(name = "author_id")
-    private Long authorId;
-
     @Column(name = "number_of_pages")
     private Long numberOfPages;
 
     @Column(name = "lang")
     private String lang;
+
+    @Column(nullable = false, updatable = false)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    private Set<AuthorEntity> authorEntities;
 }

@@ -25,5 +25,7 @@ dist/
 nbdist/
 .nb-gradle/
 
+#DOKER
+/docker-compose.yml
 
 

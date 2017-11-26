@@ -1,10 +1,10 @@
 package md.utm.fcim.webservice.controller.impl;
 
 import lombok.RequiredArgsConstructor;
-import md.utm.fcim.webservice.controller.BookController;
-import md.utm.fcim.webservice.converter.BookViewConverter;
-import md.utm.fcim.webservice.view.BookView;
-import md.utm.fcim.service.BookService;
+import md.utm.fcim.service.AuthorService;
+import md.utm.fcim.webservice.controller.AuthorController;
+import md.utm.fcim.webservice.converter.AuthorViewConverter;
+import md.utm.fcim.webservice.view.AuthorView;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class BookControllerImpl implements BookController {
+public class AuthorControllerImpl implements AuthorController {
 
-    private final BookService service;
-    private final BookViewConverter converter;
+    private final AuthorService service;
+    private final AuthorViewConverter converter;
 
     @Override
-    public List<BookView> findAll() {
+    public List<AuthorView> findAll() {
         return service.findAll()
                 .stream()
                 .map(converter::convert)
@@ -26,7 +26,7 @@ public class BookControllerImpl implements BookController {
     }
 
     @Override
-    public BookView findById(Long id) {
+    public AuthorView findById(Long id) {
         return converter.convert(service.findById(id));
     }
 }

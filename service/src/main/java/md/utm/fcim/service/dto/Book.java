@@ -15,8 +15,6 @@ public class Book {
 
     private String genre;
 
-    private Long authorId;
-
     private Long numberOfPages;
 
     private String lang;
