@@ -5,6 +5,8 @@ import md.utm.fcim.repository.AuthorRepository;
 import md.utm.fcim.service.AuthorService;
 import md.utm.fcim.service.converter.AuthorConverter;
 import md.utm.fcim.service.dto.Author;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +30,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author findById(Long id) {
         return converter.convert(repository.findOne(id));
+    }
+
+    @Override
+    public Page<Author> findPage(Integer page, Integer size) {
+        return repository.findAll(new PageRequest(page, size)).map(converter::convert);
     }
 }
