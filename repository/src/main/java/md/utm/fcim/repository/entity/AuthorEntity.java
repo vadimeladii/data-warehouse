@@ -8,6 +8,8 @@ import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.*;
+
 @Getter
 @Setter
 @Entity
@@ -16,7 +18,7 @@ import java.util.Set;
 public class AuthorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -32,9 +34,11 @@ public class AuthorEntity {
     @Column(name = "gender")
     private String gender;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {MERGE, REMOVE, REFRESH, DETACH})
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
     @BatchSize(size = 20)
     private Set<BookEntity> bookEntities;
 }

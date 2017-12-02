@@ -2,11 +2,14 @@ package md.utm.fcim.webservice.controller.impl;
 
 import lombok.RequiredArgsConstructor;
 import md.utm.fcim.service.AuthorService;
+import md.utm.fcim.service.dto.Author;
 import md.utm.fcim.webservice.controller.AuthorController;
 import md.utm.fcim.webservice.converter.AuthorViewConverter;
+import md.utm.fcim.webservice.view.AuthorView;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Response;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -35,8 +38,23 @@ public class AuthorControllerImpl implements AuthorController {
 
     @Override
     public Response findById(Long id) {
+        Optional<Author> dto = service.findById(id);
+        return Response.status(dto.isPresent() ? Response.Status.OK : Response.Status.NO_CONTENT)
+                .entity(converter.convert(dto.orElse(null)))
+                .build();
+    }
+
+    @Override
+    public Response create(AuthorView authorView) {
+        return Response.status(Response.Status.CREATED)
+                .entity(service.create(converter.reverse().convert(authorView)))
+                .build();
+    }
+
+    @Override
+    public Response edit(AuthorView authorView) {
         return Response.ok()
-                .entity(converter.convert(service.findById(id)))
+                .entity(service.edit(converter.reverse().convert(authorView)))
                 .build();
     }
 }

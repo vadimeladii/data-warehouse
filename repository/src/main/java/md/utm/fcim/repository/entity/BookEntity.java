@@ -15,7 +15,7 @@ import java.util.Set;
 public class BookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -31,9 +31,6 @@ public class BookEntity {
     @Column(name = "lang")
     private String lang;
 
-    @Column(nullable = false, updatable = false)
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "bookEntities")
     private Set<AuthorEntity> authorEntities;
 }

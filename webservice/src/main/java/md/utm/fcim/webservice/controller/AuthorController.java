@@ -1,6 +1,7 @@
 package md.utm.fcim.webservice.controller;
 
 import md.utm.fcim.webservice.constants.OffsetLimitHelper;
+import md.utm.fcim.webservice.view.AuthorView;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -23,4 +24,14 @@ public interface AuthorController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     Response findById(@PathParam("id") Long id);
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response create(AuthorView authorView);
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response edit(AuthorView authorView);
 }

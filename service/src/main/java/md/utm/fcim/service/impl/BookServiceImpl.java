@@ -5,9 +5,12 @@ import md.utm.fcim.repository.BookRepository;
 import md.utm.fcim.service.BookService;
 import md.utm.fcim.service.converter.BookConverter;
 import md.utm.fcim.service.dto.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +29,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book findById(Long id) {
-        return converter.convert(repository.findOne(id));
+    public Optional<Book> findById(Long id) {
+        return Optional.ofNullable(converter.convert(repository.findOne(id)));
+    }
+
+    @Override
+    public Page<Book> findPage(Integer page, Integer size) {
+        return repository.findAll(new PageRequest(page, size)).map(converter::convert);
+    }
+
+    @Override
+    public Book create(Book book) {
+        return converter.convert(repository.save(converter.reverse().convert(book)));
+
+    }
+
+    @Override
+    public Book edit(Book book) {
+        return converter.convert(repository.save(converter.reverse().convert(book)));
     }
 }
