@@ -1,0 +1,1 @@
+INSERT INTO book(title, genre, number_of_pages, lang) VALUES('title_test', 'DRAMA', 200, 'ROMANIAN');

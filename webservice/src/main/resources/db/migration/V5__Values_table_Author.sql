@@ -1,0 +1,1 @@
+INSERT INTO author(first_name, last_name, age, gender) VALUES ('first_name_test', 'last_name_test', 20, 'MASCULINE');
