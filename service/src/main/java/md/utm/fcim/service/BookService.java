@@ -16,5 +16,5 @@ public interface BookService {
 
     Book create(Book book);
 
-    Book edit(Book book);
+    Book edit(Long id, Book book);
 }

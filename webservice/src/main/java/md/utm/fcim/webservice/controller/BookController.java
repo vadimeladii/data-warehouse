@@ -31,7 +31,8 @@ public interface BookController {
     Response create(BookView bookView);
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Response edit(BookView bookView);
+    Response edit(@PathParam("id") Long id, BookView bookView);
 }

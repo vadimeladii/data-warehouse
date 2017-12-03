@@ -53,9 +53,9 @@ public class BookControllerImpl implements BookController {
     }
 
     @Override
-    public Response edit(BookView bookView) {
+    public Response edit(Long id, BookView bookView) {
         return Response.ok()
-                .entity(service.edit(converter.reverse().convert(bookView)))
+                .entity(service.edit(id, converter.reverse().convert(bookView)))
                 .build();
     }
 }

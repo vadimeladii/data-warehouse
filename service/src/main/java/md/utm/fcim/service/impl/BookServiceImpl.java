@@ -1,6 +1,9 @@
 package md.utm.fcim.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import md.utm.fcim.common.error.EntityNotFoundException;
+import md.utm.fcim.common.error.IllegalArgumentException;
+import md.utm.fcim.common.error.WrongUrlIdException;
 import md.utm.fcim.repository.BookRepository;
 import md.utm.fcim.service.BookService;
 import md.utm.fcim.service.converter.BookConverter;
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static md.utm.fcim.common.expression.ExpressionAsserts.verify;
 
 @Service
 @RequiredArgsConstructor
@@ -40,12 +45,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book create(Book book) {
+        verify(book.getId() != null, () -> new IllegalArgumentException("Book Id should be null"));
         return converter.convert(repository.save(converter.reverse().convert(book)));
-
     }
 
     @Override
-    public Book edit(Book book) {
+    public Book edit(Long id, Book book) {
+        verify(!book.getId().equals(id), () -> new WrongUrlIdException(Book.class, book.getId(), id));
+        verify(!repository.exists(id), () -> new EntityNotFoundException(Book.class, id));
         return converter.convert(repository.save(converter.reverse().convert(book)));
     }
 }
