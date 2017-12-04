@@ -5,6 +5,7 @@ import md.utm.fcim.service.AuthorService;
 import md.utm.fcim.service.dto.Author;
 import md.utm.fcim.webservice.controller.AuthorController;
 import md.utm.fcim.webservice.converter.AuthorViewConverter;
+import md.utm.fcim.webservice.converter.assembler.AuthorViewAssembler;
 import md.utm.fcim.webservice.view.AuthorView;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +19,13 @@ public class AuthorControllerImpl implements AuthorController {
 
     private final AuthorService service;
     private final AuthorViewConverter converter;
+    private final AuthorViewAssembler assembler;
 
     @Override
     public Response findAll() {
         return Response.ok().entity(service.findAll()
                 .stream()
-                .map(converter::convert)
+                .map(assembler::toResource)
                 .collect(Collectors.toList())).build();
     }
 
@@ -32,7 +34,7 @@ public class AuthorControllerImpl implements AuthorController {
         return Response.ok().entity(service.findPage(page, size)
                 .getContent()
                 .stream()
-                .map(converter::convert)
+                .map(assembler::toResource)
                 .collect(Collectors.toList())).build();
     }
 
@@ -40,21 +42,21 @@ public class AuthorControllerImpl implements AuthorController {
     public Response findById(Long id) {
         Optional<Author> dto = service.findById(id);
         return Response.status(dto.isPresent() ? Response.Status.OK : Response.Status.NO_CONTENT)
-                .entity(converter.convert(dto.orElse(null)))
+                .entity(assembler.toResource(dto.orElse(null)))
                 .build();
     }
 
     @Override
     public Response create(AuthorView authorView) {
         return Response.status(Response.Status.CREATED)
-                .entity(service.create(converter.reverse().convert(authorView)))
+                .entity(assembler.toResource(service.create(converter.reverse().convert(authorView))))
                 .build();
     }
 
     @Override
     public Response edit(AuthorView authorView) {
         return Response.ok()
-                .entity(service.edit(converter.reverse().convert(authorView)))
+                .entity(assembler.toResource(service.edit(converter.reverse().convert(authorView))))
                 .build();
     }
 }

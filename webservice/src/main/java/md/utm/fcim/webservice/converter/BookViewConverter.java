@@ -13,7 +13,7 @@ public class BookViewConverter extends Converter<Book, BookView> {
     @Override
     protected BookView doForward(Book dto) {
         BookView view = new BookView();
-        view.setId(dto.getId());
+        view.setIdBook(dto.getId());
         view.setTitle(dto.getTitle());
         view.setGenre(dto.getGenre());
         view.setNumberOfPages(dto.getNumberOfPages());
@@ -24,7 +24,7 @@ public class BookViewConverter extends Converter<Book, BookView> {
     @Override
     protected Book doBackward(BookView view) {
         Book dto = new Book();
-        dto.setId(view.getId());
+        dto.setId(view.getIdBook());
         dto.setTitle(view.getTitle());
         dto.setGenre(view.getGenre());
         dto.setNumberOfPages(view.getNumberOfPages());

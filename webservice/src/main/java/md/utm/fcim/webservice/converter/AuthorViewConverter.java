@@ -17,7 +17,7 @@ public class AuthorViewConverter extends Converter<Author, AuthorView> {
     @Override
     protected AuthorView doForward(Author dto) {
         AuthorView view = new AuthorView();
-        view.setId(dto.getId());
+        view.setIdAuthor(dto.getId());
         view.setFirstName(dto.getFirstName());
         view.setLastName(dto.getLastName());
         view.setAge(dto.getAge());
@@ -32,7 +32,7 @@ public class AuthorViewConverter extends Converter<Author, AuthorView> {
     @Override
     protected Author doBackward(AuthorView view) {
         Author dto = new Author();
-        dto.setId(view.getId());
+        dto.setId(view.getIdAuthor());
         dto.setFirstName(view.getFirstName());
         dto.setLastName(view.getLastName());
         dto.setAge(view.getAge());
