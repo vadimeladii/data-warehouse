@@ -11,7 +11,6 @@ import md.utm.fcim.common.error.config.WrongUrlIdExceptionMapper;
 import md.utm.fcim.webservice.controller.impl.AuthorControllerImpl;
 import md.utm.fcim.webservice.controller.impl.BookControllerImpl;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.wadl.internal.WadlResource;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ApplicationPath;
@@ -22,16 +21,15 @@ public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
         registerEndpoints();
-        BeanConfig swaggerConfig = new BeanConfig();
-        swaggerConfig.setBasePath("/api");
-        SwaggerConfigLocator.getInstance().putConfig(SwaggerContextService.CONFIG_ID_DEFAULT, swaggerConfig);
-
-        packages(getClass().getPackage().getName(), ApiListingResource.class.getPackage().getName());
+//        BeanConfig swaggerConfig = new BeanConfig();
+//        swaggerConfig.setBasePath("/api");
+//        SwaggerConfigLocator.getInstance().putConfig(SwaggerContextService.CONFIG_ID_DEFAULT, swaggerConfig);
+//
+//        packages(getClass().getPackage().getName(), ApiListingResource.class.getPackage().getName());
 
     }
 
     private void registerEndpoints() {
-        register(WadlResource.class);
         register(BookControllerImpl.class);
         register(AuthorControllerImpl.class);
         register(EntityNotFoundExceptionMapper.class);
