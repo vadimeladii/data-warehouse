@@ -1,5 +1,6 @@
 package md.utm.fcim.webservice.controller;
 
+import io.swagger.annotations.Api;
 import md.utm.fcim.webservice.constants.OffsetLimitHelper;
 import md.utm.fcim.webservice.view.BookView;
 
@@ -8,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/book")
+@Api(value = "BOOK Controller Resource Endpoint")
 public interface BookController {
 
     @GET
