@@ -12,7 +12,6 @@ import md.utm.fcim.webservice.controller.impl.AuthorControllerImpl;
 import md.utm.fcim.webservice.controller.impl.BookControllerImpl;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.wadl.internal.WadlResource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ApplicationPath;
@@ -20,9 +19,6 @@ import javax.ws.rs.ApplicationPath;
 @Component
 @ApplicationPath("/api")
 public class JerseyConfig extends ResourceConfig {
-
-    @Value("${spring.jersey.application-path:/}")
-    private String apiPath;
 
     public JerseyConfig() {
         registerEndpoints();
