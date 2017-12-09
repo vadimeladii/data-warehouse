@@ -2,10 +2,13 @@ package md.utm.fcim.service;
 
 import md.utm.fcim.service.dto.Author;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@Validated
 public interface AuthorService {
 
     List<Author> findAll();
@@ -14,7 +17,7 @@ public interface AuthorService {
 
     Page<Author> findPage(Integer page, Integer size);
 
-    Author create(Author author);
+    Author create(@Valid Author author);
 
-    Author edit(Author author);
+    Author edit(@Valid Author author);
 }
