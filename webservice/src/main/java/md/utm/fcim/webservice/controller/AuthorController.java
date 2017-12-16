@@ -17,7 +17,7 @@ public interface AuthorController {
     Response findAll();
 
     @GET
-    @Path("/pagination")
+    @Path("/pages")
     @Produces(MediaType.APPLICATION_JSON)
     Response findPage(@QueryParam("page") @DefaultValue(OffsetLimitHelper.PAGE) Integer page,
                      @QueryParam("size") @DefaultValue(OffsetLimitHelper.SIZE) Integer size);

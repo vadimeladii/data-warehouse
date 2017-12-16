@@ -31,11 +31,9 @@ public class AuthorControllerImpl implements AuthorController {
 
     @Override
     public Response findPage(Integer page, Integer size) {
-        return Response.ok().entity(service.findPage(page, size)
-                .getContent()
-                .stream()
-                .map(assembler::toResource)
-                .collect(Collectors.toList())).build();
+        return Response.ok()
+                .entity(service.findPage(page, size).map(assembler::toResource))
+                .build();
     }
 
     @Override
