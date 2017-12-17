@@ -52,9 +52,9 @@ public class AuthorControllerImpl implements AuthorController {
     }
 
     @Override
-    public Response edit(AuthorView authorView) {
+    public Response edit(Long id, AuthorView authorView) {
         return Response.ok()
-                .entity(assembler.toResource(service.edit(converter.reverse().convert(authorView))))
+                .entity(assembler.toResource(service.edit(id, converter.reverse().convert(authorView))))
                 .build();
     }
 }

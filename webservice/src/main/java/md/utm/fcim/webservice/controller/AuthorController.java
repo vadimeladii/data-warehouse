@@ -20,7 +20,7 @@ public interface AuthorController {
     @Path("/pages")
     @Produces(MediaType.APPLICATION_JSON)
     Response findPage(@QueryParam("page") @DefaultValue(OffsetLimitHelper.PAGE) Integer page,
-                     @QueryParam("size") @DefaultValue(OffsetLimitHelper.SIZE) Integer size);
+                      @QueryParam("size") @DefaultValue(OffsetLimitHelper.SIZE) Integer size);
 
     @GET
     @Path("/{id}")
@@ -33,7 +33,8 @@ public interface AuthorController {
     Response create(AuthorView authorView);
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Response edit(AuthorView authorView);
+    Response edit(@PathParam("id") Long id, AuthorView authorView);
 }

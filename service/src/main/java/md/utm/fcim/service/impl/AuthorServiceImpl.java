@@ -1,6 +1,9 @@
 package md.utm.fcim.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import md.utm.fcim.common.error.EntityNotFoundException;
+import md.utm.fcim.common.error.IllegalArgumentException;
+import md.utm.fcim.common.error.WrongUrlIdException;
 import md.utm.fcim.repository.AuthorRepository;
 import md.utm.fcim.service.AuthorService;
 import md.utm.fcim.service.converter.AuthorConverter;
@@ -13,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static md.utm.fcim.common.expression.ExpressionAsserts.verify;
 
 @Service
 @RequiredArgsConstructor
@@ -45,11 +50,14 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author create(Author author) {
+        verify(author.getId() != null, () -> new IllegalArgumentException("Author Id should be null"));
         return converter.convert(repository.save(converter.reverse().convert(author)));
     }
 
     @Override
-    public Author edit(Author author) {
+    public Author edit(Long id, Author author) {
+        verify(!author.getId().equals(id), () -> new WrongUrlIdException(Author.class, author.getId(), id));
+        verify(!repository.exists(id), () -> new EntityNotFoundException(Author.class, id));
         return converter.convert(repository.save(converter.reverse().convert(author)));
     }
 }

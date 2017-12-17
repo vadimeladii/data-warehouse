@@ -20,6 +20,14 @@ public class BookViewAssembler extends JaxRsResourceAssemblerSupport<Book, BookV
 
     @Override
     public BookView toResource(Book dto) {
+        return correctedToResource(dto);
+    }
+
+    private BookView correctedToResource(Book dto) {
+        return dto == null ? null : converter(dto);
+    }
+
+    private BookView converter(Book dto) {
         BookView view = createResourceWithId(dto.getId(), dto);
         BookView result = converter.convert(dto);
         result.add(view.getLinks());

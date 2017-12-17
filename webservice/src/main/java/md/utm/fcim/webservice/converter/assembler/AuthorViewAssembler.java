@@ -25,6 +25,14 @@ public class AuthorViewAssembler extends JaxRsResourceAssemblerSupport<Author, A
 
     @Override
     public AuthorView toResource(Author dto) {
+        return correctedToResource(dto);
+    }
+
+    private AuthorView correctedToResource(Author dto) {
+        return dto == null ? null : converter(dto);
+    }
+
+    private AuthorView converter(Author dto) {
         AuthorView view = createResourceWithId(dto.getId(), dto);
         AuthorView result = converter.convert(dto);
         result.add(view.getLinks());
